@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_sale_order_history_price" model="ir.ui.view">
+        <field name="name">sale.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook//page[1]//field[@name='order_line']//field[@name='product_id']" position="after">
+                <button name="get_history_price" string="History" type="object" icon="fa-list"/>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>
