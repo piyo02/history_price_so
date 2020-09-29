@@ -10,6 +10,17 @@
             <xpath expr="//notebook//page[1]//field[@name='order_line']//group[1]//group[2]//div[1]" position="after">
                 <button name="get_history_price" string="History" type="object" icon="fa-list"/>
             </xpath>
+            <xpath expr="//notebook//page[1]//field[@name='order_line']//div[@groups='base.group_no_one']" position="after">
+                <label for="history_price_ids" class="oe_edit_only oe_create_only"/>
+                <field string="History Price" name="history_price_ids" class="oe_edit_only">
+                    <tree>
+                        <field name="order_id" />
+                        <field name="date" />
+                        <field name="product_id"/>
+                        <field name="price_unit"/>
+                    </tree>
+                </field>
+            </xpath>
         </field>
     </record>
 
