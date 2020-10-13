@@ -9,7 +9,8 @@
     'depends': ['sale'],
     'data': [
         'views/history_price.xml',
-        'views/sale_order.xml'
+        'views/sale_order.xml',
+        # 'security/ir.model.access.csv'
     ],
     'images': [''],
     'auto_install': False,

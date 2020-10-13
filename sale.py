@@ -23,6 +23,17 @@ class SaleOrderLine(models.Model):
             'domain': "[('id','in',[" + ','.join(map(str, ids )) + "])]"
         }
         return result
+        # lines = []
+        # order_lines = self.env["sale.order.line"].search( [ ("product_id", "=", self.product_id.id ), ("order_id.partner_id", "=", self.order_id.partner_id.id ) ] )
+        # for line in order_lines:
+        #     val = {
+        #         'order_id': line.order_id,
+        #         'date': line.order_id.date_order,
+        #         'product_id': line.product_id,
+        #         'price_unit': line.price_unit
+        #     }
+        #     lines.append((0, 0, val))
+        # self.history_price_ids = lines
 
     @api.multi
     @api.onchange('product_id')
@@ -47,11 +58,19 @@ class SaleOrderLine(models.Model):
         })
         return res
 
+    # @api.model
+    # def write(self, values):
+    #     values['history_price_ids'] = None
+    #     res = super(SaleOrderLine, self).write(values)
+    #     self.history_price_ids = None
+    #     return res
+            
+
 class SaleOrderLineHistory(models.Model):
     _name = 'sale.order.line.history'
 
     order_id = fields.Many2one('sale.order', string='Order Reference', required=True, ondelete='cascade', index=True, copy=False)
     date = fields.Date(string="Tanggal Pembelian")
     line_id = fields.Many2one('sale.order.line', string='Order Line Reference', required=True, ondelete='cascade', index=True, copy=False)
-    product_id = fields.Many2one('product.product', string='Product', domain=[('sale_ok', '=', True)], change_default=True, ondelete='cascade', required=True)
+    product_id = fields.Many2one('product.product', string='Product', domain=[('sale_ok', '=', True)], change_default=True, ondelete='restrict', required=True)
     price_unit = fields.Integer(string='Harga')
