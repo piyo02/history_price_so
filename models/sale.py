@@ -53,5 +53,5 @@ class SaleOrderLineHistory(models.Model):
     order_id = fields.Many2one('sale.order', string='Order Reference', required=True, ondelete='cascade', index=True, copy=False)
     date = fields.Date(string="Tanggal Pembelian")
     line_id = fields.Many2one('sale.order.line', string='Order Line Reference', required=True, ondelete='cascade', index=True, copy=False)
-    product_id = fields.Many2one('product.product', string='Product', domain=[('sale_ok', '=', True)], change_default=True, ondelete='cascade', required=True)
+    product_id = fields.Many2one('product.product', string='Product', domain=[('sale_ok', '=', True)], change_default=True, ondelete='restrict', required=True)
     price_unit = fields.Integer(string='Harga')
